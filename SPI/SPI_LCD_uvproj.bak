@@ -390,6 +390,11 @@
               <FileType>2</FileType>
               <FilePath>.\STM32F10x.s</FilePath>
             </File>
+            <File>
+              <FileName>armv10_std.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\armv10_std.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -404,6 +409,13 @@
         </Group>
         <Group>
           <GroupName>Library</GroupName>
+          <Files>
+            <File>
+              <FileName>ARMV10_STD.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>.\ARMV10_STD.lib</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
