@@ -77,7 +77,7 @@ void EADogm204_on()
 	while(!(SPI2->SR & TXE)); //TXE-Buffer leer?
 	SPI2->DR= 0xF0;
 	while(!(SPI2->SR & TXE)); //TXE-Buffer leer?
-	SPI2->DR= 0xFF;
+	SPI2->DR= 0x00;
 }
 
 
@@ -97,21 +97,22 @@ void EADogm204_on()
 
 void EADOGM204A_put_char(char c)
 {
+	char TXE=0x0002;
 	char nibbleh;	  	// Variable für die 4 höherwertigen Bits
 	char nibblel;		// Variable für die 4 niederwertigen Bits
 		
-	nibbleh = c&0xf0; // um 4 nach rechts shiften um 4 höherwertigen Bits zu extrahieren
+	nibbleh = c&0xf0; 
 	nib2asc(&nibbleh);
-	nibblel = (c<<4)&0xf0;
+	nibblel = (c>>4)&0xf0; // um 4 nach rechts shiften um 4 höherwertigen Bits zu extrahieren
 	nib2asc(&nibblel);
 
-	while(!(SPI2->SR & 0x0002));
+	while(!(SPI2->SR & TXE));
 	SPI2->DR = 0x00FA;
 
-	while(!(SPI2->SR & 0x0002));
+	while(!(SPI2->SR & TXE));
 	SPI2->DR = nibbleh;
 
-	while(!(SPI2->SR & 0x0002));
+	while(!(SPI2->SR & TXE));
 	SPI2->DR = nibblel;
 	
 }
